@@ -469,6 +469,11 @@
             </exclusions>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.xirado</groupId>
+            <artifactId>JDUI</artifactId>
+            <version>60c1df1bcf</version>
+        </dependency>
         <!-- Include it again as JDA has it on the "runtime" scope -->
         <!-- Match JDA's version to avoid the bot exploding with NoSuchClass/MethodError -->
         <dependency>
