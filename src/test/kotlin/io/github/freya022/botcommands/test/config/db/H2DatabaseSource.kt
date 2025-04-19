@@ -29,6 +29,9 @@ class H2DatabaseSource : HikariSourceSupplier {
         //Migrate BC tables
         createFlyway("bc", "bc_database_scripts").migrate()
 
+        // JDUI
+        createFlyway("jdui", "jdui_database_scripts").migrate()
+
         //You can use the same function for your database, you just have to change the schema and scripts location
         //Migrate BC test tables
         createFlyway("public", "bc_test_database_scripts").migrate()
