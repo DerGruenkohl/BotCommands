@@ -1,9 +1,9 @@
 package io.github.freya022.botcommands.api.components
 
 import io.github.freya022.botcommands.api.components.event.ButtonEvent
+import net.dv8tion.jda.api.components.buttons.Button as JDAButton
+import net.dv8tion.jda.api.components.buttons.ButtonStyle
 import net.dv8tion.jda.api.entities.emoji.Emoji
-import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle
-import net.dv8tion.jda.api.interactions.components.buttons.Button as JDAButton
 
 interface Button : JDAButton,
                    AwaitableComponent<ButtonEvent>,
@@ -19,7 +19,11 @@ interface Button : JDAButton,
 
     override fun withLabel(label: String): Button
 
+    @Deprecated("Replaced with withCustomId()")
     override fun withId(id: String): Nothing =
+        throw UnsupportedOperationException("This type of button cannot contain custom IDs")
+
+    override fun withCustomId(id: String): Nothing =
         throw UnsupportedOperationException("This type of button cannot contain custom IDs")
 
     override fun withUrl(url: String): Nothing =
@@ -27,5 +31,8 @@ interface Button : JDAButton,
 
     override fun withStyle(style: ButtonStyle): Button
 
-    override fun getId(): String
+    @Deprecated("Replaced with getCustomId()", ReplaceWith("getCustomId()"))
+    override fun getId(): String = getCustomId()
+
+    override fun getCustomId(): String
 }

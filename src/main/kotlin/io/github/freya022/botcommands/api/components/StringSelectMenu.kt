@@ -1,7 +1,7 @@
 package io.github.freya022.botcommands.api.components
 
 import io.github.freya022.botcommands.api.components.event.StringSelectEvent
-import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu as JDAStringSelectMenu
+import net.dv8tion.jda.api.components.selections.StringSelectMenu as JDAStringSelectMenu
 
 interface StringSelectMenu : JDAStringSelectMenu,
                              AwaitableComponent<StringSelectEvent>,
@@ -13,5 +13,6 @@ interface StringSelectMenu : JDAStringSelectMenu,
 
     override fun withDisabled(disabled: Boolean): StringSelectMenu
 
-    override fun getId(): String
+    @Deprecated("Replaced with getCustomId()", ReplaceWith("getCustomId()"))
+    override fun getId(): String = customId
 }

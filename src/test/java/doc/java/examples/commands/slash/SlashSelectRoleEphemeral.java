@@ -8,9 +8,9 @@ import io.github.freya022.botcommands.api.components.EntitySelectMenu;
 import io.github.freya022.botcommands.api.components.SelectMenus;
 import io.github.freya022.botcommands.api.components.annotations.RequiresComponents;
 import io.github.freya022.botcommands.test.switches.TestLanguage;
+import net.dv8tion.jda.api.components.actionrow.ActionRow;
+import net.dv8tion.jda.api.components.selections.EntitySelectMenu.SelectTarget;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
-import net.dv8tion.jda.api.interactions.components.selections.EntitySelectMenu.SelectTarget;
 import net.dv8tion.jda.api.utils.TimeFormat;
 
 import java.time.Duration;
@@ -49,7 +49,7 @@ public class SlashSelectRoleEphemeral extends ApplicationCommand {
         temporarySelectMenuRef.set(roleMenu);
 
         event.reply("This select menu expires " + TimeFormat.RELATIVE.after(Duration.ofSeconds(10)))
-                .addActionRow(roleMenu)
+                .addComponents(ActionRow.of(roleMenu))
                 .queue();
     }
 }

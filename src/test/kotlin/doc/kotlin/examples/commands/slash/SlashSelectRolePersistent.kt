@@ -1,6 +1,7 @@
 package doc.kotlin.examples.commands.slash
 
 import dev.minn.jda.ktx.coroutines.await
+import dev.minn.jda.ktx.interactions.components.row
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.slash.GuildSlashEvent
@@ -13,8 +14,8 @@ import io.github.freya022.botcommands.api.components.annotations.RequiresCompone
 import io.github.freya022.botcommands.api.components.builder.bindWith
 import io.github.freya022.botcommands.api.components.event.EntitySelectEvent
 import io.github.freya022.botcommands.test.switches.TestLanguage
+import net.dv8tion.jda.api.components.selections.EntitySelectMenu.SelectTarget
 import net.dv8tion.jda.api.entities.Role
-import net.dv8tion.jda.api.interactions.components.selections.EntitySelectMenu.SelectTarget
 import kotlin.random.Random
 
 @Command
@@ -35,7 +36,7 @@ class SlashSelectRolePersistent : ApplicationCommand() {
         }
 
         event.reply("This select menu always works")
-            .addActionRow(roleMenu)
+            .addComponents(row(roleMenu))
             .await()
     }
 

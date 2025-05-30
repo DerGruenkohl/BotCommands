@@ -1,6 +1,7 @@
 package doc.kotlin.examples.commands.slash
 
 import dev.minn.jda.ktx.coroutines.await
+import dev.minn.jda.ktx.interactions.components.row
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.slash.GuildSlashEvent
@@ -10,9 +11,9 @@ import io.github.freya022.botcommands.api.components.SelectMenus
 import io.github.freya022.botcommands.api.components.annotations.RequiresComponents
 import io.github.freya022.botcommands.api.core.utils.after
 import io.github.freya022.botcommands.test.switches.TestLanguage
+import net.dv8tion.jda.api.components.actionrow.ActionRow
+import net.dv8tion.jda.api.components.selections.EntitySelectMenu.SelectTarget
 import net.dv8tion.jda.api.entities.Role
-import net.dv8tion.jda.api.interactions.components.ActionRow
-import net.dv8tion.jda.api.interactions.components.selections.EntitySelectMenu.SelectTarget
 import net.dv8tion.jda.api.utils.TimeFormat
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.seconds
@@ -47,7 +48,7 @@ class SlashSelectRoleEphemeral : ApplicationCommand() {
         temporarySelectMenu = roleMenu
 
         event.reply("This select menu expires ${TimeFormat.RELATIVE.after(10.seconds)}")
-            .addActionRow(roleMenu)
+            .addComponents(row(roleMenu))
             .await()
     }
 }

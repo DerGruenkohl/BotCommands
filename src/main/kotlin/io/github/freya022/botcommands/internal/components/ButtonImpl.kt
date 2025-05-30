@@ -4,17 +4,22 @@ import io.github.freya022.botcommands.api.components.Button
 import io.github.freya022.botcommands.api.components.event.ButtonEvent
 import io.github.freya022.botcommands.internal.components.controller.ComponentController
 import io.github.freya022.botcommands.internal.utils.throwInternal
+import net.dv8tion.jda.api.components.actionrow.ActionRowChildComponentUnion
+import net.dv8tion.jda.api.components.buttons.Button as JDAButton
+import net.dv8tion.jda.api.components.buttons.ButtonStyle
+import net.dv8tion.jda.api.components.section.SectionAccessoryComponentUnion
 import net.dv8tion.jda.api.entities.emoji.Emoji
-import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle
-import net.dv8tion.jda.api.interactions.components.buttons.Button as JDAButton
 
+@CustomJDAComponent(net.dv8tion.jda.internal.components.buttons.ButtonImpl::class)
 internal class ButtonImpl internal constructor(
     componentController: ComponentController,
     override val internalId: Int,
     private val button: JDAButton
 ) : AbstractAwaitableComponentImpl<ButtonEvent>(componentController),
     Button,
-    JDAButton by button {
+    JDAButton by button,
+    ActionRowChildComponentUnion,
+    SectionAccessoryComponentUnion {
 
     override fun withDisabled(disabled: Boolean): ButtonImpl {
         return ButtonImpl(componentController, internalId, super<JDAButton>.withDisabled(disabled))
@@ -32,7 +37,7 @@ internal class ButtonImpl internal constructor(
         return ButtonImpl(componentController, internalId, super<JDAButton>.withStyle(style))
     }
 
-    override fun getId(): String = button.id ?: throwInternal("BC components cannot have null IDs")
+    override fun getCustomId(): String = button.customId ?: throwInternal("BC components cannot have null IDs")
 
     override fun getUrl(): String? = null
 

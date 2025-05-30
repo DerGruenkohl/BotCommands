@@ -9,8 +9,8 @@ import io.github.freya022.botcommands.api.commands.application.slash.annotations
 import io.github.freya022.botcommands.api.components.Buttons;
 import io.github.freya022.botcommands.api.components.annotations.RequiresComponents;
 import io.github.freya022.botcommands.test.switches.TestLanguage;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.components.actionrow.ActionRow;
+import net.dv8tion.jda.api.components.buttons.Button;
 import net.dv8tion.jda.api.utils.TimeFormat;
 
 import java.time.Duration;
@@ -42,7 +42,7 @@ public class SlashSayAgainEphemeral extends ApplicationCommand {
         temporaryButtonRef.set(temporarySaySentenceButton); // We have to do this to get the button in our timeout handler
 
         event.reply("This button expires " + TimeFormat.RELATIVE.after(Duration.ofSeconds(10)))
-                .addActionRow(temporarySaySentenceButton)
+                .addComponents(ActionRow.of(temporarySaySentenceButton))
                 .queue();
     }
 }
