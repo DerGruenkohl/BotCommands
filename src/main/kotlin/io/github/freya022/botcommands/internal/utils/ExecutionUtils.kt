@@ -68,11 +68,20 @@ private suspend fun insertAggregate(firstParam: Any, aggregatedObjects: MutableM
         }
     } else {
         val aggregatorArguments: MutableMap<KParameter, Any?> = HashMap(aggregator.parametersSize)
+        var addedOption = false
         for (option in parameter.options) {
             //This is necessary to distinguish between null mappings and default mappings
             if (option in optionValues) {
                 aggregatorArguments[option] = optionValues[option]
+                addedOption = true
             }
+        }
+        // If this is not a vararg, it should throw later when calling the aggregator
+        if (!addedOption && parameter.isVararg) {
+            // TODO: this may cause issues with text commands
+            //  for example when a variation has no argument
+            //  and another variation has a 0-N vararg
+            aggregatorArguments[parameter] = emptyList<Any?>()
         }
 
         for (nestedAggregatedParameter in parameter.nestedAggregatedParameters) {
